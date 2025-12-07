@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FileText, History, Network, Fingerprint, Menu, X } from 'lucide-react';
+import { FileText, History, Network, Fingerprint, Menu, X, Server } from 'lucide-react';
 
 interface SidebarProps {
   activeItem: string;
@@ -7,10 +7,11 @@ interface SidebarProps {
 }
 
 const menuItems = [
-  { id: 'new-item', label: 'New Item', icon: FileText },
+  { id: 'dashboard', label: 'Dashboard', icon: FileText },
   { id: 'build-history', label: 'Build History', icon: History },
   { id: 'project-relationship', label: 'Project Relationship', icon: Network },
-  { id: 'check-fingerprint', label: 'Check Fingerprint', icon: Fingerprint },
+  { id: 'workers', label: 'Workers', icon: Server },
+  { id: 'workflows', label: 'Workflows', icon: Fingerprint },
 ];
 
 export default function Sidebar({ activeItem, onItemClick }: SidebarProps) {

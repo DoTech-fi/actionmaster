@@ -4,7 +4,7 @@ import TopNav from './TopNav';
 import MainContent from './MainContent';
 
 export default function Dashboard() {
-  const [activeItem, setActiveItem] = useState('new-item');
+  const [activeItem, setActiveItem] = useState('dashboard');
 
   return (
     <div className="jenkins-bg min-h-screen flex">
@@ -17,7 +17,7 @@ export default function Dashboard() {
         <TopNav />
 
         {/* Main Content */}
-        <MainContent />
+        <MainContent activeItem={activeItem} onNavigate={setActiveItem} />
       </div>
     </div>
   );

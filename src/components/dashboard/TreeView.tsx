@@ -60,13 +60,17 @@ const mockTreeData: TreeNodeData[] = [
   },
 ];
 
-export default function TreeView() {
+interface TreeViewProps {
+  isTerminalOpen?: boolean;
+  onRunWorkflow?: (repo: string) => void;
+  onBackFromTerminal?: () => void;
+}
+
+export default function TreeView({ onRunWorkflow }: TreeViewProps) {
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [selectedRepository, setSelectedRepository] = useState<string>('');
-  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
-  const [runningRepository, setRunningRepository] = useState<string>('');
 
   const handleRefresh = () => {
     setIsRefreshing(true);
@@ -80,26 +84,10 @@ export default function TreeView() {
 
   const handleRunWorkflow = (repositoryName: string) => {
     setIsPanelOpen(false);
-    setRunningRepository(repositoryName);
-    setIsTerminalOpen(true);
+    if (onRunWorkflow) {
+      onRunWorkflow(repositoryName);
+    }
   };
-
-  const handleBackFromTerminal = () => {
-    setIsTerminalOpen(false);
-    setRunningRepository('');
-  };
-
-  // Show terminal view when workflow is running
-  if (isTerminalOpen) {
-    return (
-      <div className="panel-bg rounded-lg shadow-lg overflow-hidden h-[700px]">
-        <WorkflowTerminal
-          repositoryName={runningRepository}
-          onBack={handleBackFromTerminal}
-        />
-      </div>
-    );
-  }
 
   return (
     <>
